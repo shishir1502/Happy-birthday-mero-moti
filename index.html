@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Budi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      animation: fadeIn 2s ease-in;
+    }
+
+    iframe#audioPlayer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      border: none;
+      z-index: 1000;
+    }
+
+    iframe#contentFrame {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+
+    button#startMusic {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 25px;
+      background: #ff4d6d;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 2000;
+      animation: pulse 2s infinite;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      color: #ff4d6d;
+      opacity: 0.7;
+      animation: floatHearts linear infinite;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.1);
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio player iframe -->
+  <iframe id="audioPlayer" src="player.html" allow="autoplay"></iframe>
+
+  <!-- Tap to Play Button -->
+  <button id="startMusic">Tap to Play Music 🎵</button>
+
+  <!-- Content iframe -->
+  <iframe id="contentFrame" src="page1.html"></iframe>
+
+  <script>
+    const audioIframe = document.getElementById('audioPlayer').contentWindow;
+    const btn = document.getElementById('startMusic');
+
+    btn.addEventListener('click', () => {
+      audioIframe.postMessage({ action: 'play' }, '*');
+      btn.style.display = 'none';
+    });
+
+    // Floating Hearts Effect
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+
+      const x = Math.random() * window.innerWidth;
+      const size = Math.random() * 20 + 20;
+      const duration = Math.random() * 3 + 2;
+
+      heart.style.left = `${x}px`;
+      heart.style.fontSize = `${size}px`;
+      heart.style.animationDuration = `${duration}s`;
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>

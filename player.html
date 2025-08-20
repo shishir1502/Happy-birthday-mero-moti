@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><body style="margin:0">
+  <audio id="bgmusic" loop>
+    <source src="budi.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    window.addEventListener('message', e => {
+      if (e.data && e.data.action === 'play') {
+        document.getElementById('bgmusic').play();
+      }
+    });
+  </script>
+</body></html>

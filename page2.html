@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Long We've Been Together?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 1.4em;
+      color: #666;
+    }
+    .profile-img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border: 4px solid #ff69b4;
+      margin-bottom: 10px;
+    }
+    .timer-title {
+      font-size: 1.2em;
+      border: 2px solid #ff85a2;
+      border-radius: 25px;
+      display: inline-block;
+      padding: 8px 20px;
+      margin-top: 20px;
+      color: #444;
+      background-color: #ffe0ec;
+    }
+    .counter {
+      font-size: 1.8em;
+      color: #3366ff;
+      margin-top: 30px;
+    }
+    .labels {
+      font-size: 0.9em;
+      color: #777;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    .labels div {
+      width: 90px;
+    }
+    .button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1em;
+      border-radius: 25px;
+      margin-top: 40px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #ff4d94;
+    }
+    .hearts {
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #ff69b4;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="firstdate.jpg" alt="Memory Photo" class="profile-img">
+  <h1>Love you moti</h1>
+
+  <div class="timer-title">How long we've been together?</div>
+
+  <div class="counter" id="timeTogether">
+    Loading...
+  </div>
+
+  <div class="labels">
+    <div>Years</div>
+    <div>Months</div>
+    <div>Weeks</div>
+    <div>Days</div>
+    <div>Hrs</div>
+    <div>Mins</div>
+    <div>Secs</div>
+  </div>
+
+  <button class="button" onclick="window.location.href='page3.html'">puppy & ducky</button>
+
+  <div class="hearts">🐾 ♥ 🐾 ♥</div>
+
+  <script>
+    const startDate = new Date("2024-12-02T00:00:00");
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000); // seconds
+
+      const years = Math.floor(diff / (365.25 * 24 * 3600));
+      const months = Math.floor((diff % (365.25 * 24 * 3600)) / (30.44 * 24 * 3600));
+      const weeks = Math.floor(diff / (7 * 24 * 3600));
+      const days = Math.floor(diff / (24 * 3600));
+      const hrs = Math.floor((diff % (24 * 3600)) / 3600);
+      const mins = Math.floor((diff % 3600) / 60);
+      const secs = diff % 60;
+
+      document.getElementById("timeTogether").innerHTML =
+        `${years} : ${months} : ${weeks} : ${days} : ${hrs} : ${mins} : ${secs}`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+
+</body>
+</html>
+
